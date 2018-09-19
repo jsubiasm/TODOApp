@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-// import { reorderArray } from 'ionic-angular';
 
 import { DetailPage } from '../detail/detail';
 
@@ -15,6 +14,8 @@ export class HomePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
     this.items = [];
+
+    console.log('service getNotas');
 
     this.items.push({
       notaId: 1,
@@ -41,13 +42,14 @@ export class HomePage {
   }  
 
   reorderItems(indexes) {
-    console.log("reorderItems ->");
+    console.log("reorderItems init ->");
     console.log(indexes);
-
-    //this.items = reorderArray(this.items, indexes);
+    console.log(this.items);
+    console.log("reorderItems splice ->");
     let element = this.items[indexes.from];
     this.items.splice(indexes.from, 1);
     this.items.splice(indexes.to, 0, element);
+    console.log(this.items);
   }
 
   delete(event, item) {

@@ -30,6 +30,12 @@ export class DetailPage {
     console.log("save ->");
     console.log(event);
     console.log(item);
-    this.navCtrl.pop();    
+    if (item.notaId) {
+      console.log('service updateNotaTexto [' + item.notaId + '] [' + item.notaTexto + ']');
+    }
+    else {
+      console.log('service insertNota [¿notaNumeroOrden?] [' + item.notaTexto + ']');
+    }
+    this.navCtrl.pop();
   }
 }

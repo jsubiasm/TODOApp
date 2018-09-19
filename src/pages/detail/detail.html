@@ -11,7 +11,7 @@
   <p>notaId: {{selectedItem.notaId}}</p>
   <p>notaOrden: {{selectedItem.notaOrden}}</p>
   <p>notaTexto:</p>
-  <ion-textarea rows="10" placeholder="Introducir texto..." [value]="selectedItem.notaTexto"></ion-textarea>
+  <ion-textarea rows="10" placeholder="Introducir texto..." [(ngModel)]="selectedItem.notaTexto"></ion-textarea>
   <button style="text-transform: none;" ion-button block color="light" (click)="save($event, selectedItem)">
     <ion-icon name="checkmark"></ion-icon>
   </button>
