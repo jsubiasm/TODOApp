@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { reorderArray } from 'ionic-angular';
 
-import { DetallePage } from '../detalle/detalle';
+import { DetailPage } from '../detail/detail';
 
 @Component({
   selector: 'page-home',
@@ -50,7 +50,7 @@ export class HomePage {
     console.log("edit ->");
     console.log(event);
     console.log(item);
-    this.navCtrl.push(DetallePage, {
+    this.navCtrl.push(DetailPage, {
       item: item
     });
   }
@@ -58,7 +58,7 @@ export class HomePage {
   insert(event) {
     console.log("add ->");
     console.log(event);
-    this.navCtrl.push(DetallePage, {
+    this.navCtrl.push(DetailPage, {
       item: { notaId: '', notaOrden: '', notaTexto: '' }
     });
   }

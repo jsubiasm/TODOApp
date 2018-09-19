@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the DetallePage page.
+ * Generated class for the DetailPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,10 +10,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-detalle',
-  templateUrl: 'detalle.html',
+  selector: 'page-detail',
+  templateUrl: 'detail.html',
 })
-export class DetallePage {
+export class DetailPage {
 
   selectedItem: any;
 
@@ -23,7 +23,7 @@ export class DetallePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DetallePage');
+    console.log('ionViewDidLoad DetailPage');
   }
 
 }

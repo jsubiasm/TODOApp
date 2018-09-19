@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
-import { DetallePage } from '../pages/detalle/detalle';
+import { DetailPage } from '../pages/detail/detail';
 
 
 
@@ -16,7 +16,7 @@ import { DetallePage } from '../pages/detalle/detalle';
     MyApp,
     HomePage,
     AboutPage,
-    DetallePage
+    DetailPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +27,7 @@ import { DetallePage } from '../pages/detalle/detalle';
     MyApp,
     HomePage,
     AboutPage,
-    DetallePage
+    DetailPage
   ],
   providers: [
     StatusBar,
