@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Nota</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p>notaId: {{selectedItem.notaId}}</p>
+  <p>notaOrden: {{selectedItem.notaOrden}}</p>
+  <p>notaTexto:</p>
+  <ion-textarea rows="10" placeholder="Introducir texto..." [value]="selectedItem.notaTexto"></ion-textarea>
+  <button style="text-transform: none;" ion-button block color="light">
+    <ion-icon name="checkmark"></ion-icon>
+  </button>
+</ion-content>

@@ -1,14 +1,38 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
-      Ionic Blank
+      Notas
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <ion-list reorder="true" (ionItemReorder)="reorderItems($event)">
+    <ion-item-sliding *ngFor="let item of items">
+      <ion-item (click)="edit($event, item)">
+        <p>notaId: {{item.notaId}}</p>
+        <p>notaOrden: {{item.notaOrden}}</p>
+        <p>notaTexto: {{item.notaTexto}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button style="text-transform: none;" ion-button color="light" (click)="edit($event, item)">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button style="text-transform: none;" ion-button color="light" (click)="delete($event, item)">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-fab right bottom>
+      <button ion-fab color="light" (click)="insert($event)">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+  </ion-list>
+
 </ion-content>
