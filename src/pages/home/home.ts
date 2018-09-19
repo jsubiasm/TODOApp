@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { reorderArray } from 'ionic-angular';
+// import { reorderArray } from 'ionic-angular';
 
 import { DetailPage } from '../detail/detail';
 
@@ -18,26 +18,36 @@ export class HomePage {
 
     this.items.push({
       notaId: 1,
-	  notaOrden: 1,
+      notaOrden: 1,
       notaTexto: 'Esta es la nota uno'
     });
 
     this.items.push({
       notaId: 2,
-	  notaOrden: 2,
+      notaOrden: 2,
       notaTexto: 'Esta es la segunda nota'
     });
 
     this.items.push({
       notaId: 3,
-	  notaOrden: 3,
+      notaOrden: 3,
       notaTexto: 'Y esta es la tercera'
     });
 
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad HomePage');
+  }  
+
   reorderItems(indexes) {
-    this.items = reorderArray(this.items, indexes);
+    console.log("reorderItems ->");
+    console.log(indexes);
+
+    //this.items = reorderArray(this.items, indexes);
+    let element = this.items[indexes.from];
+    this.items.splice(indexes.from, 1);
+    this.items.splice(indexes.to, 0, element);
   }
 
   delete(event, item) {

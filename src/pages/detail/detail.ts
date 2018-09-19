@@ -26,4 +26,10 @@ export class DetailPage {
     console.log('ionViewDidLoad DetailPage');
   }
 
+  save(event, item) {
+    console.log("save ->");
+    console.log(event);
+    console.log(item);
+    this.navCtrl.pop();    
+  }
 }
