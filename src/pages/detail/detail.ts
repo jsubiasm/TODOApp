@@ -22,19 +22,13 @@ export class DetailPage {
     this.selectedItem = navParams.get('item');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DetailPage');
-  }
-
   save(event, item) {
-    console.log("save ->");
-    console.log(event);
-    console.log(item);
     if (item.notaId) {
       console.log('service updateNotaTexto [' + item.notaId + '] [' + item.notaTexto + ']');
     }
     else {
-      console.log('service insertNota [¿notaNumeroOrden?] [' + item.notaTexto + ']');
+      console.log('service getUltimaNota');
+      console.log('service insertNota [ultima nota + 1] [' + item.notaTexto + ']');
     }
     this.navCtrl.pop();
   }
