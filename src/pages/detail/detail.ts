@@ -23,7 +23,7 @@ export class DetailPage {
   }
 
   save(event, item) {
-    if (item.notaId) {
+    if (parseInt(item.notaId) >= 0) {
       console.log('service updateNotaTexto [' + item.notaId + '] [' + item.notaTexto + ']');
     }
     else {
