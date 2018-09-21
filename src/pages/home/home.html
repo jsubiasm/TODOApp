@@ -10,19 +10,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-list reorder="true" (ionItemReorder)="reorderItems($event)">
-    <ion-item-sliding *ngFor="let item of items">
-      <ion-item (click)="edit($event, item)">
-        <p>notaId: {{item.notaId}}</p>
-        <p>notaOrden: {{item.notaOrden}}</p>
-        <p>notaTexto: {{item.notaTexto}}</p>
+  <ion-list reorder="true" (ionItemReorder)="reorderNotas($event)">
+    <ion-item-sliding *ngFor="let notaItem of arrayNotas">
+      <ion-item (click)="edit($event, notaItem)">
+        <p>notaId: {{notaItem.notaId}}</p>
+        <p>notaOrden: {{notaItem.notaOrden}}</p>
+        <p>notaTexto: {{notaItem.notaTexto}}</p>
       </ion-item>
       <ion-item-options side="right">
-        <button style="text-transform: none;" ion-button color="light" (click)="edit($event, item)">
+        <button style="text-transform: none;" ion-button color="light" (click)="edit($event, notaItem)">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <ion-icon name="create"></ion-icon>
         </button>
-        <button style="text-transform: none;" ion-button color="light" (click)="delete($event, item)">
+        <button style="text-transform: none;" ion-button color="light" (click)="delete($event, notaItem)">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <ion-icon name="trash"></ion-icon>
         </button>

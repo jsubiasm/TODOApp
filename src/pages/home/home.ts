@@ -11,7 +11,7 @@ import { TodoServiceProvider } from '../../providers/todo-service/todo-service';
 })
 export class HomePage {
 
-  items: Array<{ notaId: number, notaOrden: number, notaTexto: string }>;
+  arrayNotas: Array<{ notaId: number, notaOrden: number, notaTexto: string }>;
 
   constructor(
     public navCtrl: NavController,
@@ -31,66 +31,60 @@ export class HomePage {
   */
 
   ionViewWillEnter() {
-
-    this.items = [];
-
-    console.log('service getNotas');
+    this.arrayNotas = [];
     this.todoServiceProvider.getNotas()
       .subscribe(
-        (data) => {
-          console.log('service getNotas response ->');
-          console.log(data);
-          this.items = data['results'];
+        (notasArray: any) => {
+          console.log('service getNotas notasArray ->');
+          console.log(notasArray);
+          var i;
+          for (i = 0; i < notasArray.length; i++) {
+            var nota = notasArray[i];
+            console.log('service getNotas notasArray nota ->');
+            console.log(nota);
+            var notaIdentificador = nota.identificador[Object.keys(nota.identificador)[0]];
+            var notaNumeroOrden = nota.numeroOrden[Object.keys(nota.numeroOrden)[0]];
+            console.log('service getNotas notasArray nota.identificador ->');
+            console.log(notaIdentificador);
+            console.log('service getNotas notasArray nota.numeroOrden ->');
+            console.log(notaNumeroOrden);
+            this.arrayNotas.push({
+              notaId: parseInt(notaIdentificador),
+              notaOrden: parseInt(notaNumeroOrden),
+              notaTexto: nota.texto
+            });
+          }
         },
         (error) => {
           console.error(error);
         }
-      )
-
-    /*this.items.push({
-      notaId: 0,
-      notaOrden: 0,
-      notaTexto: 'Esta es la nota uno'
-    });
-
-    this.items.push({
-      notaId: 1,
-      notaOrden: 1,
-      notaTexto: 'Esta es la segunda nota'
-    });
-
-    this.items.push({
-      notaId: 2,
-      notaOrden: 2,
-      notaTexto: 'Y esta es la tercera'
-    });*/
-
+      );
   }
 
-  reorderItems(indexes) {
-    let element = this.items[indexes.from];
-    this.items.splice(indexes.from, 1);
-    this.items.splice(indexes.to, 0, element);
-    console.log(this.items);
-    this.items.forEach(function (element, idx) {
-      console.log('service updateNotaNumeroOrden [' + element.notaId + '] [' + idx + ']');
+  reorderNotas(indexes) {
+    let notaElement = this.arrayNotas[indexes.from];
+    this.arrayNotas.splice(indexes.from, 1);
+    this.arrayNotas.splice(indexes.to, 0, notaElement);
+    console.log(this.arrayNotas);
+    this.arrayNotas.forEach(function (notaItem, idx) {
+      console.log('service updateNotaNumeroOrden [' + notaItem.notaId + '] [' + idx + ']');
     });
   }
 
-  delete(event, item) {
-    console.log('service deleteNota [' + item.notaId + ']');
+  delete(event, nota) {
+    console.log('service deleteNota [' + nota.notaId + ']');
     console.log('service getNotas');
   }
 
-  edit(event, item) {
+  edit(event, nota) {
     this.navCtrl.push(DetailPage, {
-      item: item
+      nota: nota
     });
   }
 
   insert(event) {
     this.navCtrl.push(DetailPage, {
-      item: { notaId: '', notaOrden: '', notaTexto: '' }
+      nota: { notaId: '', notaOrden: '', notaTexto: '' }
     });
   }
 

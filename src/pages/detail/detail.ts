@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { TodoServiceProvider } from '../../providers/todo-service/todo-service';
+
+
 /**
  * Generated class for the DetailPage page.
  *
@@ -15,21 +18,50 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DetailPage {
 
-  selectedItem: any;
+  selectedNota: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public todoServiceProvider: TodoServiceProvider) {    // If we navigated to this page, we will have an item available as a nav param
+    this.selectedNota = navParams.get('nota');
   }
 
-  save(event, item) {
-    if (parseInt(item.notaId) >= 0) {
-      console.log('service updateNotaTexto [' + item.notaId + '] [' + item.notaTexto + ']');
+  save(event, notaPantalla) {
+    if (parseInt(notaPantalla.notaId) >= 0) {
+      console.log('service updateNotaTexto [' + notaPantalla.notaId + '] [' + notaPantalla.notaTexto + ']');
     }
     else {
-      console.log('service getUltimaNota');
-      console.log('service insertNota [ultima nota + 1] [' + item.notaTexto + ']');
+      this.todoServiceProvider.getUltimaNota()
+        .subscribe(
+          (notasArray: any) => {
+            console.log('service getUltimaNota notasArray ->');
+            console.log(notasArray);
+            var notaNumeroOrden = 0;
+            if (notasArray[0]) {
+              notaNumeroOrden = notasArray[0].numeroOrden[Object.keys(notasArray[0].numeroOrden)[0]];
+              console.log('service getUltimaNota notasArray[0].numeroOrden->');
+              console.log(notaNumeroOrden);
+              notaNumeroOrden = notaNumeroOrden + 1;
+            }
+            this.todoServiceProvider.insertNota(notaNumeroOrden, notaPantalla.notaTexto)
+              .subscribe(
+                (serviceReturn: any) => {
+                  console.log('service insertNota serviceReturn ->');
+                  console.log(serviceReturn);
+                  this.navCtrl.pop();
+                },
+                (error) => {
+                  console.log('service insertNota error ->');
+                  console.error(error);
+                }
+              );
+          },
+          (error) => {
+            console.log('service getUltimaNota error ->');
+            console.error(error);
+          }
+        );
     }
-    this.navCtrl.pop();
   }
 }

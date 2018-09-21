@@ -17,4 +17,14 @@ export class TodoServiceProvider {
     return this.http.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/todoapp-rufkc/service/TODOService/incoming_webhook/getNotas');
   }
 
+  getUltimaNota() {
+    return this.http.get('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/todoapp-rufkc/service/TODOService/incoming_webhook/getUltimaNota');
+  }
+
+  insertNota(notaNumeroOrden, notaTexto) {
+    var insertNotaUrl = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/todoapp-rufkc/service/TODOService/incoming_webhook/insertNota';
+    insertNotaUrl = insertNotaUrl + '?notaNumeroOrden=' + notaNumeroOrden + '&notaTexto=' + notaTexto;
+    return this.http.get(insertNotaUrl);
+  }
+
 }
