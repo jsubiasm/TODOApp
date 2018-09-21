@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { DetailPage } from '../detail/detail';
 
+import { TodoServiceProvider } from '../../providers/todo-service/todo-service';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -11,8 +13,10 @@ export class HomePage {
 
   items: Array<{ notaId: number, notaOrden: number, notaTexto: string }>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public todoServiceProvider: TodoServiceProvider) {
   }
 
   /*
@@ -28,11 +32,22 @@ export class HomePage {
 
   ionViewWillEnter() {
 
-    console.log('service getNotas');
-
     this.items = [];
 
-    this.items.push({
+    console.log('service getNotas');
+    this.todoServiceProvider.getNotas()
+      .subscribe(
+        (data) => {
+          console.log('service getNotas response ->');
+          console.log(data);
+          this.items = data['results'];
+        },
+        (error) => {
+          console.error(error);
+        }
+      )
+
+    /*this.items.push({
       notaId: 0,
       notaOrden: 0,
       notaTexto: 'Esta es la nota uno'
@@ -48,7 +63,8 @@ export class HomePage {
       notaId: 2,
       notaOrden: 2,
       notaTexto: 'Y esta es la tercera'
-    });
+    });*/
+
   }
 
   reorderItems(indexes) {
