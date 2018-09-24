@@ -42,7 +42,7 @@ export class DetailPage {
               notaNumeroOrden = notasArray[0].numeroOrden[Object.keys(notasArray[0].numeroOrden)[0]];
               console.log('service getUltimaNota notasArray[0].numeroOrden->');
               console.log(notaNumeroOrden);
-              notaNumeroOrden = notaNumeroOrden + 1;
+              notaNumeroOrden++;
             }
             this.todoServiceProvider.insertNota(notaNumeroOrden, notaPantalla.notaTexto)
               .subscribe(
