@@ -35,30 +35,24 @@ export class DetailPage {
       this.todoServiceProvider.getUltimaNota()
         .subscribe(
           (notasArray: any) => {
-            console.log('service getUltimaNota notasArray ->');
-            console.log(notasArray);
             var notaNumeroOrden = 0;
             if (notasArray[0]) {
-              notaNumeroOrden = notasArray[0].numeroOrden[Object.keys(notasArray[0].numeroOrden)[0]];
-              console.log('service getUltimaNota notasArray[0].numeroOrden->');
-              console.log(notaNumeroOrden);
+              notaNumeroOrden = parseInt(notasArray[0].numeroOrden.$numberLong);
               notaNumeroOrden++;
             }
             this.todoServiceProvider.insertNota(notaNumeroOrden, notaPantalla.notaTexto)
               .subscribe(
                 (serviceReturn: any) => {
-                  console.log('service insertNota serviceReturn ->');
-                  console.log(serviceReturn);
                   this.navCtrl.pop();
                 },
                 (error) => {
-                  console.log('service insertNota error ->');
+                  console.error('service insertNota error ->');
                   console.error(error);
                 }
               );
           },
           (error) => {
-            console.log('service getUltimaNota error ->');
+            console.error('service getUltimaNota error ->');
             console.error(error);
           }
         );

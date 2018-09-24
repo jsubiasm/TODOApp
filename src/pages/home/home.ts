@@ -5,13 +5,15 @@ import { DetailPage } from '../detail/detail';
 
 import { TodoServiceProvider } from '../../providers/todo-service/todo-service';
 
+import { Nota } from '../../model/nota';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  arrayNotas: Array<{ notaId: number, notaOrden: number, notaTexto: string }>;
+  arrayNotas: Nota[];
 
   constructor(
     public navCtrl: NavController,
@@ -35,27 +37,20 @@ export class HomePage {
     this.todoServiceProvider.getNotas()
       .subscribe(
         (notasArray: any) => {
-          console.log('service getNotas notasArray ->');
-          console.log(notasArray);
           var i;
           for (i = 0; i < notasArray.length; i++) {
             var nota = notasArray[i];
-            console.log('service getNotas notasArray nota ->');
-            console.log(nota);
-            var notaIdentificador = nota.identificador[Object.keys(nota.identificador)[0]];
-            var notaNumeroOrden = nota.numeroOrden[Object.keys(nota.numeroOrden)[0]];
-            console.log('service getNotas notasArray nota.identificador ->');
-            console.log(notaIdentificador);
-            console.log('service getNotas notasArray nota.numeroOrden ->');
-            console.log(notaNumeroOrden);
-            this.arrayNotas.push({
-              notaId: parseInt(notaIdentificador),
-              notaOrden: parseInt(notaNumeroOrden),
-              notaTexto: nota.texto
-            });
+            this.arrayNotas.push(
+              new Nota(
+                parseInt(nota.identificador.$numberLong),
+                parseInt(nota.numeroOrden.$numberLong),
+                nota.texto
+              )
+            );
           }
         },
         (error) => {
+          console.error('service getNotas error ->');
           console.error(error);
         }
       );
@@ -65,7 +60,6 @@ export class HomePage {
     let notaElement = this.arrayNotas[indexes.from];
     this.arrayNotas.splice(indexes.from, 1);
     this.arrayNotas.splice(indexes.to, 0, notaElement);
-    console.log(this.arrayNotas);
     this.arrayNotas.forEach(function (notaItem, idx) {
       console.log('service updateNotaNumeroOrden [' + notaItem.notaId + '] [' + idx + ']');
     });
@@ -84,7 +78,7 @@ export class HomePage {
 
   insert(event) {
     this.navCtrl.push(DetailPage, {
-      nota: { notaId: '', notaOrden: '', notaTexto: '' }
+      nota: new Nota(null, null, '')
     });
   }
 
