@@ -32,8 +32,8 @@ export class HomePage {
   ionViewCanLeave() { console.log('service ionViewCanLeave'); }
   */
 
-  ionViewWillEnter() {
-    this.arrayNotas = [];
+  getNotas() {
+    console.log('service getNotas');
     this.todoServiceProvider.getNotas()
       .subscribe(
         (notasArray: any) => {
@@ -56,18 +56,44 @@ export class HomePage {
       );
   }
 
+  ionViewWillEnter() {
+    this.arrayNotas = [];
+    this.getNotas();
+  }
+
   reorderNotas(indexes) {
     let notaElement = this.arrayNotas[indexes.from];
     this.arrayNotas.splice(indexes.from, 1);
     this.arrayNotas.splice(indexes.to, 0, notaElement);
-    this.arrayNotas.forEach(function (notaItem, idx) {
-      console.log('service updateNotaNumeroOrden [' + notaItem.notaId + '] [' + idx + ']');
-    });
+    var i;
+    for (i = 0; i < this.arrayNotas.length; i++) {
+      let notaItem = this.arrayNotas[i];
+      console.log('service updateNotaNumeroOrden [' + notaItem.notaId + '] [' + i + ']');
+      this.todoServiceProvider.updateNotaNumeroOrden(notaItem.notaId, i)
+        .subscribe(
+          (serviceReturn: any) => {
+            this.getNotas();
+          },
+          (error) => {
+            console.error('service updateNotaNumeroOrden error ->');
+            console.error(error);
+          }
+        );
+    }
   }
 
   delete(event, nota) {
     console.log('service deleteNota [' + nota.notaId + ']');
-    console.log('service getNotas');
+    this.todoServiceProvider.deleteNota(nota.notaId)
+      .subscribe(
+        (serviceReturn: any) => {
+          this.getNotas();
+        },
+        (error) => {
+          console.error('service deleteNota error ->');
+          console.error(error);
+        }
+      );
   }
 
   edit(event, nota) {

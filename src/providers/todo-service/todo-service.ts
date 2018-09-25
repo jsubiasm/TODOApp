@@ -22,9 +22,27 @@ export class TodoServiceProvider {
   }
 
   insertNota(notaNumeroOrden, notaTexto) {
-    var insertNotaUrl = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/todoapp-rufkc/service/TODOService/incoming_webhook/insertNota';
-    insertNotaUrl = insertNotaUrl + '?notaNumeroOrden=' + notaNumeroOrden + '&notaTexto=' + notaTexto;
-    return this.http.get(insertNotaUrl);
+    var url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/todoapp-rufkc/service/TODOService/incoming_webhook/insertNota';
+    url = url + '?notaNumeroOrden=' + notaNumeroOrden + '&notaTexto=' + notaTexto;
+    return this.http.get(url);
+  }
+
+  updateNotaNumeroOrden(notaId, notaNumeroOrden) {
+    var url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/todoapp-rufkc/service/TODOService/incoming_webhook/updateNotaNumeroOrden';
+    url = url + '?notaId=' + notaId + '&notaNumeroOrden=' + notaNumeroOrden;
+    return this.http.get(url);
+  }
+
+  updateNotaTexto(notaId, notaTexto) {
+    var url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/todoapp-rufkc/service/TODOService/incoming_webhook/updateNotaTexto';
+    url = url + '?notaId=' + notaId + '&notaTexto=' + notaTexto;
+    return this.http.get(url);
+  }
+
+  deleteNota(notaId) {
+    var url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/todoapp-rufkc/service/TODOService/incoming_webhook/deleteNota';
+    url = url + '?notaId=' + notaId;
+    return this.http.get(url);
   }
 
 }
