@@ -33,6 +33,7 @@ export class HomePage {
   */
 
   getNotas() {
+    this.arrayNotas = [];
     console.log('service getNotas');
     this.todoServiceProvider.getNotas()
       .subscribe(
@@ -57,7 +58,6 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.arrayNotas = [];
     this.getNotas();
   }
 
@@ -72,7 +72,7 @@ export class HomePage {
       this.todoServiceProvider.updateNotaNumeroOrden(notaItem.notaId, i)
         .subscribe(
           (serviceReturn: any) => {
-            this.getNotas();
+            // this.getNotas();
           },
           (error) => {
             console.error('service updateNotaNumeroOrden error ->');
