@@ -13,9 +13,9 @@
   <ion-list reorder="true" (ionItemReorder)="reorderNotas($event)">
     <ion-item-sliding *ngFor="let notaItem of arrayNotas">
       <ion-item (click)="edit($event, notaItem)">
-        <p>notaId: {{notaItem.notaId}}</p>
-        <p>notaOrden: {{notaItem.notaOrden}}</p>
-        <p>notaTexto: {{notaItem.notaTexto}}</p>
+        <!--p>notaId: {{notaItem.notaId}}</p>
+        <p>notaOrden: {{notaItem.notaOrden}}</p-->
+        <div text-wrap>{{notaItem.notaTexto}}</div>
       </ion-item>
       <ion-item-options side="right">
         <button style="text-transform: none;" ion-button color="light" (click)="edit($event, notaItem)">
